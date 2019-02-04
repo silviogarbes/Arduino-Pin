@@ -1,3 +1,9 @@
+/*
+For instructions, go to https://github.com/silviogarbes/Arduino-Pin
+Created by Silvio Garbes Lara, February, 2019.
+Released into the public domain.
+*/
+
 #ifndef Pin_h // Se não definido o Pin_h
 #define Pin_h // Define o PushButton_h
 #include <Arduino.h> // Usa alguns recursos padrão do arduino ex. pinMode
