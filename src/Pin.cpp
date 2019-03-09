@@ -30,6 +30,11 @@ void Pin::setToDigital(){
 void Pin::setMode(byte aux){
   mode = aux;
   pinMode(number,mode);
+  if(mode == 2){
+    level = HIGH;
+    lastLevel = HIGH;
+    trigger = level;
+  }
 }
 // Tempo de debounce, default is 50 ms
 void Pin::setDebounceDelay(unsigned long aux){
@@ -44,19 +49,26 @@ int Pin::read(){
   }
   return level;
 }
-// digitalRead com debounce
-bool Pin::readWithDebounce(){
+// digitalRead com debounce |LOW|HIGH|FALLING|RISING|
+byte Pin::readWithDebounce(){
   bool currentLevel = digitalRead(number);
+  trigger = level;
   if (currentLevel != lastLevel) {
     lastDebounceTime = millis();
   }
   if ((millis() - lastDebounceTime) > debounceDelay) {
     if (currentLevel != level) {
+      if(level == HIGH && currentLevel == LOW){
+        trigger = FALLING;
+      }
+      if(level == LOW && currentLevel == HIGH){
+        trigger = RISING;
+      }
       level = currentLevel;
     }
   }
   lastLevel = currentLevel;
-  return level;
+  return trigger;
 }
 // digitalWrite 0 ou 1
 void Pin::write(bool aux){
