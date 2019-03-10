@@ -8,7 +8,7 @@ Available methods:
     void setMode(byte); // (0) INPUT, (1) OUTPUT, (2) INPUT_PULLUP
     void setDebounceDelay(unsigned long); // Tempo de debounce. Default is 50 ms
     int read(); // digitalRead 0 - 1 ou analogRead 0 - 500
-    bool readWithDebounce(); // digitalRead com debounce
+    byte readWithDebounce(); // digitalRead com debounce
     void write(bool); // digitalWrite 0 ou 1
     void writePwm(int); // analogWrite 0 - 500
 
@@ -60,6 +60,11 @@ Available methods:
     Serial.println(botao1.readWithDebounce());
     
     botao1.readWithDebounce();
+    
+    if(botao1.readWithDebounce() == FALLING){
+      Serial.print("readWithDebounce: ");
+      Serial.print("FALLING");
+    }
     
     delay(200);
     led1.writePwm(botao4.read());

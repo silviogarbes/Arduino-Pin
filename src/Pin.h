@@ -17,6 +17,7 @@ class Pin {
     unsigned long lastDebounceTime = 0; // [DEBOUNCE] Variável utilizada na temporização
     unsigned long debounceDelay = 50; // [DEBOUNCE] tempo para estabilizar e minimizar o efeito bouncing
     bool lastLevel = LOW; // [DEBOUNCE] variável para identificar mudança de estado
+    byte trigger = LOW; // (0) LOW, (1) HIGH, (2) FALLING, (3) RISING | [DEBOUNCE] variável para estado atual da mudança de estado
 
   public:
     Pin(int);
@@ -24,7 +25,7 @@ class Pin {
     void setMode(byte); // (0) INPUT, (1) OUTPUT, (2) INPUT_PULLUP
     void setDebounceDelay(unsigned long); // Tempo de debounce. O padrão é 50 ms
     int read(); // digitalRead 0 - 1 ou analogRead 0 - 500
-    bool readWithDebounce(); // digitalRead com debounce
+    byte readWithDebounce(); // digitalRead com debounce
     void write(bool); // digitalWrite 0 ou 1
     void writePwm(int); // analogWrite 0 - 500
 };
