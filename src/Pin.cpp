@@ -40,14 +40,25 @@ void Pin::setMode(byte aux){
 void Pin::setDebounceDelay(unsigned long aux){
   debounceDelay = aux;
 }
-// digitalRead 0 - 1 ou analogRead 0 - 500
+// digitalRead |LOW|HIGH|FALLING|RISING| ou analogRead 0 - 500
 int Pin::read(){
   if(isDigital){
-    level = digitalRead(number);
+    bool currentLevel = digitalRead(number);
+    trigger = level;
+    if (currentLevel != level) {
+      if(level == HIGH && currentLevel == LOW){
+        trigger = FALLING;
+      }
+      if(level == LOW && currentLevel == HIGH){
+        trigger = RISING;
+      }
+      level = currentLevel;
+    }
+    return trigger;
   }else{
     level = map(analogRead(number), 0, 1023, 0, 500);
+    return level;
   }
-  return level;
 }
 // digitalRead com debounce |LOW|HIGH|FALLING|RISING|
 byte Pin::readWithDebounce(){
