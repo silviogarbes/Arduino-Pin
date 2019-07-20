@@ -40,13 +40,13 @@ void loop(){
   led2.writePwm(100);
   
   Serial.print("read: ");
-  Serial.println(botao1.read());
+  Serial.println(botao1.read()); // |LOW|HIGH|FALLING|RISING|
   Serial.print("readWithDebounce: ");
-  Serial.println(botao1.readWithDebounce());
+  Serial.println(botao1.readWithDebounce()); // |LOW|HIGH|FALLING|RISING|
   
   botao1.readWithDebounce();
   
   delay(200);
   led1.writePwm(botao4.read());
-  Serial.println(botao4.read());
+  Serial.println(botao4.read()); // analogRead 0 - 500
 }
