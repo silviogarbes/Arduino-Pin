@@ -24,8 +24,8 @@ class Pin {
     void setToDigital(); // Somente se quiser usar uma porta analogica como digital
     void setMode(byte); // (0) INPUT, (1) OUTPUT, (2) INPUT_PULLUP
     void setDebounceDelay(unsigned long); // Tempo de debounce. O padrão é 50 ms
-    int read(); // digitalRead 0 - 1 ou analogRead 0 - 500
-    byte readWithDebounce(); // digitalRead com debounce
+    int read(); // digitalRead |LOW|HIGH|FALLING|RISING| ou analogRead 0 - 500
+    byte readWithDebounce(); // digitalRead com debounce |LOW|HIGH|FALLING|RISING|
     void write(bool); // digitalWrite 0 ou 1
     void writePwm(int); // analogWrite 0 - 500
 };
