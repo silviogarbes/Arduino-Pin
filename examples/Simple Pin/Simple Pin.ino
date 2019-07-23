@@ -41,12 +41,21 @@ void loop(){
   
   Serial.print("read: ");
   Serial.println(botao1.read()); // |LOW|HIGH|FALLING|RISING|
+  
   Serial.print("readWithDebounce: ");
   Serial.println(botao1.readWithDebounce()); // |LOW|HIGH|FALLING|RISING|
-  
   botao1.readWithDebounce();
   
   delay(200);
   led1.writePwm(botao4.read());
   Serial.println(botao4.read()); // analogRead 0 - 500
+  
+  Serial.print("readTimeRunningLevel: ");
+  botao1.readTimeRunningLevel();
+  Serial.println(botao1.readTimeRunningLevel());
+
+  Serial.println(botao1.readPulseCount());
+  if(botao1.readPulseCount() > 10){
+    botao1.resetPulse();
+  }
 }
