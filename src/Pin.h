@@ -12,7 +12,9 @@ class Pin {
     unsigned long debounceDelay = 50; // [DEBOUNCE] tempo para estabilizar e minimizar o efeito bouncing
     bool lastLevel = LOW; // [DEBOUNCE] variável para identificar mudança de estado
     byte trigger = LOW; // (0) LOW, (1) HIGH, (2) FALLING, (3) RISING | [DEBOUNCE] variável para estado atual da mudança de estado
-
+	  unsigned long timeLastLevel = millis();
+    int countPulse = 0;
+  
   public:
     Pin(int);
     void setToDigital(); // Somente se quiser usar uma porta analogica como digital
@@ -20,8 +22,11 @@ class Pin {
     void setDebounceDelay(unsigned long); // Tempo de debounce. O padrão é 50 ms
     int read(); // digitalRead 0 - 1 ou analogRead 0 - 500
     byte readWithDebounce(); // digitalRead com debounce
+    unsigned long readTimeRunningLevel();
+    int readPulseCount();
     void write(bool); // digitalWrite 0 ou 1
     void writePwm(int); // analogWrite 0 - 500
+    void resetPulse();
 };
  
 #endif
