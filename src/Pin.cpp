@@ -81,6 +81,28 @@ byte Pin::readWithDebounce(){
   lastLevel = currentLevel;
   return trigger;
 }
+// Tempo rodando neste level
+unsigned long Pin::readTimeRunningLevel(){
+  bool currentLevel = digitalRead(number);
+  if (currentLevel != level) {
+    timeLastLevel = millis();
+    level = currentLevel;
+  }
+  return millis() - timeLastLevel;
+}
+// Contador de pulso
+int Pin::readPulseCount(){
+  bool currentLevel = digitalRead(number);
+  if (currentLevel != level) {
+    countPulse++;
+    level = currentLevel;
+  }
+  return countPulse;
+}
+// Reinicia contador de pulso
+void Pin::resetPulse(){
+  countPulse = 0;
+}
 // digitalWrite 0 ou 1
 void Pin::write(bool aux){
   level = aux;
