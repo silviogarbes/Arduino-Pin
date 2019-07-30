@@ -21,6 +21,8 @@ class Pin {
     unsigned long millisLastLevel = millis();
     int timeLastLevel = 0;
     int countPulse = 0;
+    float media = 0;
+  	byte quantidadeAmostras = 1;
   
   public:
     Pin(int);
@@ -35,6 +37,7 @@ class Pin {
     void write(bool); // digitalWrite 0 ou 1
     void writePwm(int); // analogWrite 0 - 500
     void resetPulse();
+    float mediaMovel(float aux);
 };
  
 #endif
