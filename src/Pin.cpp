@@ -85,10 +85,20 @@ byte Pin::readWithDebounce(){
 unsigned long Pin::readTimeRunningLevel(){
   bool currentLevel = digitalRead(number);
   if (currentLevel != level) {
-    timeLastLevel = millis();
+    millisLastLevel = millis();
     level = currentLevel;
   }
-  return millis() - timeLastLevel;
+  return millis() - millisLastLevel;
+}
+// Tempo rodando no ultimo level
+int Pin::readTimeLastLevel(){
+  bool currentLevel = digitalRead(number);
+  if (currentLevel != level) {
+    timeLastLevel = millis() - millisLastLevel;
+    millisLastLevel = millis();
+    level = currentLevel;
+  }
+  return timeLastLevel;
 }
 // Contador de pulso
 int Pin::readPulseCount(){
