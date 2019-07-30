@@ -51,8 +51,10 @@ void loop(){
   Serial.println(botao4.read()); // analogRead 0 - 500
   
   Serial.print("readTimeRunningLevel: ");
-  botao1.readTimeRunningLevel();
   Serial.println(botao1.readTimeRunningLevel());
+  
+  Serial.print("readTimeLastLevel: ");
+  Serial.println(botao1.readTimeLastLevel());
 
   Serial.println(botao1.readPulseCount());
   if(botao1.readPulseCount() > 10){
