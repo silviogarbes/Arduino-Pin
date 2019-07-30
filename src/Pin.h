@@ -18,7 +18,8 @@ class Pin {
     unsigned long debounceDelay = 50; // [DEBOUNCE] tempo para estabilizar e minimizar o efeito bouncing
     bool lastLevel = LOW; // [DEBOUNCE] variável para identificar mudança de estado
     byte trigger = LOW; // (0) LOW, (1) HIGH, (2) FALLING, (3) RISING | [DEBOUNCE] variável para estado atual da mudança de estado
-    unsigned long timeLastLevel = millis();
+    unsigned long millisLastLevel = millis();
+    int timeLastLevel = 0;
     int countPulse = 0;
   
   public:
@@ -29,6 +30,7 @@ class Pin {
     int read(); // digitalRead |LOW|HIGH|FALLING|RISING| ou analogRead 0 - 500
     byte readWithDebounce(); // digitalRead com debounce |LOW|HIGH|FALLING|RISING|
     unsigned long readTimeRunningLevel();
+    int readTimeLastLevel();
     int readPulseCount();
     void write(bool); // digitalWrite 0 ou 1
     void writePwm(int); // analogWrite 0 - 500
