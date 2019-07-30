@@ -95,10 +95,19 @@ int Pin::readTimeLastLevel(){
   bool currentLevel = digitalRead(number);
   if (currentLevel != level) {
     timeLastLevel = millis() - millisLastLevel;
+    timeLastLevel = (int) mediaMovel(timeLastLevel);
     millisLastLevel = millis();
     level = currentLevel;
   }
   return timeLastLevel;
+}
+// Media movel
+float Pin::mediaMovel(float aux) {
+  media = media + ((aux - media) / quantidadeAmostras);
+  if(quantidadeAmostras < 255){
+    quantidadeAmostras++;
+  }
+  return media;
 }
 // Contador de pulso
 int Pin::readPulseCount(){
