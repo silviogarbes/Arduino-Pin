@@ -95,16 +95,16 @@ int Pin::readTimeLastLevel(){
   bool currentLevel = digitalRead(number);
   if (currentLevel != level) {
     timeLastLevel = millis() - millisLastLevel;
-    timeLastLevel = (int) mediaMovel(timeLastLevel);
+    timeLastLevel = (int) mediaMovel(timeLastLevel, 255);
     millisLastLevel = millis();
     level = currentLevel;
   }
   return timeLastLevel;
 }
 // Media movel
-float Pin::mediaMovel(float aux) {
+float Pin::mediaMovel(float aux, byte amostras) {
   media = media + ((aux - media) / quantidadeAmostras);
-  if(quantidadeAmostras < 255){
+  if(quantidadeAmostras < amostras){
     quantidadeAmostras++;
   }
   return media;
