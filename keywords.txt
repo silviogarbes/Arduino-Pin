@@ -12,13 +12,18 @@ Pin	KEYWORD1
 # Methods and Functions (KEYWORD2) - Métodos e Funções
 #######################################
 
-setToDigital		KEYWORD2
-setMode				KEYWORD2
+setToDigital		  KEYWORD2
+setMode				    KEYWORD2
 setDebounceDelay	KEYWORD2
-read				KEYWORD2
+read				      KEYWORD2
 readWithDebounce	KEYWORD2
-write				KEYWORD2
-writePwm			KEYWORD2
+readTimeRunningLevel  KEYWORD2
+readTimeLastLevel KEYWORD2
+readPulseCount    KEYWORD2
+resetPulse        KEYWORD2
+write				      KEYWORD2
+writePwm			    KEYWORD2
+
 
 #######################################
 # Constants (LITERAL1) - Constantes
