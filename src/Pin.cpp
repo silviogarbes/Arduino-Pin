@@ -84,37 +84,41 @@ byte Pin::readWithDebounce(){
 // Tempo rodando neste level
 unsigned long Pin::readTimeRunningLevel(){
   bool currentLevel = digitalRead(number);
-  if (currentLevel != level) {
+  if (currentLevel != levelReadTimeRunningLevel) {
     millisLastLevel = millis();
-    level = currentLevel;
+    levelReadTimeRunningLevel = currentLevel;
   }
   return millis() - millisLastLevel;
 }
 // Tempo rodando no ultimo level
 int Pin::readTimeLastLevel(){
   bool currentLevel = digitalRead(number);
-  if (currentLevel != level) {
+  if (currentLevel != levelReadTimeLastLevel) {
     timeLastLevel = millis() - millisLastLevel;
-    timeLastLevel = (int) mediaMovel(timeLastLevel, 255);
+    timeLastLevel = (int) mediaMovel(timeLastLevel);
     millisLastLevel = millis();
-    level = currentLevel;
+    levelReadTimeLastLevel = currentLevel;
   }
   return timeLastLevel;
 }
 // Media movel
-float Pin::mediaMovel(float aux, byte amostras) {
-  media = media + ((aux - media) / quantidadeAmostras);
-  if(quantidadeAmostras < amostras){
-    quantidadeAmostras++;
+float Pin::mediaMovel(float aux) {
+  media = media + ((aux - media) / divisorAmostras);
+  if(divisorAmostras < amostrasMediaMovel){
+    divisorAmostras++;
   }
   return media;
+}
+// Altera amostras media movel
+void Pin::setAmostrasMediaMovel(byte aux){
+  amostrasMediaMovel = aux;
 }
 // Contador de pulso
 int Pin::readPulseCount(){
   bool currentLevel = digitalRead(number);
-  if (currentLevel != level) {
+  if (currentLevel != levelReadPulseCount) {
     countPulse++;
-    level = currentLevel;
+    levelReadPulseCount = currentLevel;
   }
   return countPulse;
 }
