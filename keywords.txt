@@ -15,6 +15,7 @@ Pin	KEYWORD1
 setToDigital		  KEYWORD2
 setMode				    KEYWORD2
 setDebounceDelay	KEYWORD2
+setAmostrasMediaMovel	KEYWORD2
 read				      KEYWORD2
 readWithDebounce	KEYWORD2
 readTimeRunningLevel  KEYWORD2
