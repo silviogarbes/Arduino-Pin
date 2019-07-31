@@ -14,6 +14,9 @@ class Pin {
     bool isDigital; // (0) analog, (1) digital
     byte mode = INPUT; // (0) INPUT, (1) OUTPUT, (2) INPUT_PULLUP
     int level = LOW; // (0) LOW, (1) HIGH [DIGITAL] | 0 - 500 [DIGITAL PWM] | 0 - 500 [ANALOG]
+    bool levelReadTimeRunningLevel = LOW;
+    bool levelReadTimeLastLevel = LOW;
+    bool levelReadPulseCount = LOW;
     unsigned long lastDebounceTime = 0; // [DEBOUNCE] Variável utilizada na temporização
     unsigned long debounceDelay = 50; // [DEBOUNCE] tempo para estabilizar e minimizar o efeito bouncing
     bool lastLevel = LOW; // [DEBOUNCE] variável para identificar mudança de estado
@@ -21,8 +24,9 @@ class Pin {
     unsigned long millisLastLevel = millis();
     int timeLastLevel = 0;
     int countPulse = 0;
+    byte amostrasMediaMovel = 255;
     float media = 0;
-    byte quantidadeAmostras = 1;
+    byte divisorAmostras = 1;
   
   public:
     Pin(int);
@@ -37,7 +41,8 @@ class Pin {
     void write(bool); // digitalWrite 0 ou 1
     void writePwm(int); // analogWrite 0 - 500
     void resetPulse();
-    float mediaMovel(float aux, byte amostras);
+    float mediaMovel(float aux);
+    void setAmostrasMediaMovel(byte aux);
 };
  
 #endif
